@@ -18,13 +18,12 @@ public class Todo {
     @GeneratedValue
     private UUID id;
 
-    public Todo(String title) {
-        this.title = title;
-    }
-
     @Column(nullable = false)
     private String title;
 
     private boolean completed = false;
 
+    public Todo(String title) {
+        this.title = title;
+    }
 }
