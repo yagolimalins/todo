@@ -49,8 +49,7 @@ public interface TodoControllerDocs {
     ResponseEntity<Todo> findById(
             @Parameter(
                     description = "ID da tarefa",
-                    required = true,
-                    example = "550e8400-e29b-41d4-a716-446655440000"
+                    required = true
             )
             UUID id
     );
