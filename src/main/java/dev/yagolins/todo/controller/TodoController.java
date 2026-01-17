@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/todos")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.DELETE})
+@CrossOrigin(origins = "*")
 @Tag(name = "Tarefas", description = "API para gerenciamento de tarefas (Todo)")
 public class TodoController implements TodoControllerDocs {
 
