@@ -35,6 +35,14 @@ public class TodoService {
         return todo;
     }
 
+    public Todo updateTitle(UUID id, String newTitle) {
+        Todo todo = findById(id);
+
+        todo.setTitle(newTitle);
+
+        return repository.save(todo);
+    }
+
     public Todo toggleCompleted(UUID id) {
         Todo todo = findById(id);
         if (todo == null) {

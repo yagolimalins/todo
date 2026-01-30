@@ -1,4 +1,4 @@
-package dev.yagolins.todo.dto;
+package dev.yagolins.todo.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

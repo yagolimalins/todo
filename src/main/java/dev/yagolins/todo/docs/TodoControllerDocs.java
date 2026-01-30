@@ -1,6 +1,7 @@
 package dev.yagolins.todo.docs;
 
-import dev.yagolins.todo.dto.TodoRequest;
+import dev.yagolins.todo.dto.request.TodoRequest;
+import dev.yagolins.todo.dto.request.UpdateTodoTitleRequest;
 import dev.yagolins.todo.entity.Todo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,10 +10,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.UUID;
+
+@Tag(
+        name = "Tarefas",
+        description = "Endpoints para gerenciamento de tarefas"
+)
 
 public interface TodoControllerDocs {
 
@@ -53,6 +60,28 @@ public interface TodoControllerDocs {
             )
             UUID id
     );
+
+    @Operation(
+            summary = "Atualizar título da tarefa",
+            description = "Atualiza apenas o título de uma tarefa existente"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Título atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
+    })
+    ResponseEntity<Todo> updateTitle(
+            @Parameter(
+                    description = "ID da tarefa",
+                    required = true
+            )
+            UUID id,
+            @RequestBody(
+                    description = "Novo título da tarefa",
+                    required = true
+            )
+            UpdateTodoTitleRequest request
+    );
+
 
     @Operation(
             summary = "Alterar status da tarefa",

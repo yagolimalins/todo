@@ -1,10 +1,10 @@
 package dev.yagolins.todo.controller;
 
 import dev.yagolins.todo.docs.TodoControllerDocs;
-import dev.yagolins.todo.dto.TodoRequest;
+import dev.yagolins.todo.dto.request.TodoRequest;
+import dev.yagolins.todo.dto.request.UpdateTodoTitleRequest;
 import dev.yagolins.todo.entity.Todo;
 import dev.yagolins.todo.service.TodoService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/todos")
-@CrossOrigin(origins = "*")
-@Tag(name = "Tarefas", description = "API para gerenciamento de tarefas (Todo)")
 public class TodoController implements TodoControllerDocs {
 
     private final TodoService service;
@@ -40,6 +38,14 @@ public class TodoController implements TodoControllerDocs {
     @GetMapping("/{id}")
     public ResponseEntity<Todo> findById(@PathVariable UUID id) {
         return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PatchMapping("/{id}/title")
+    public ResponseEntity<Todo> updateTitle(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateTodoTitleRequest request
+    ) {
+        return ResponseEntity.ok(service.updateTitle(id, request.getTitle()));
     }
 
     @PatchMapping("/{id}/status")
